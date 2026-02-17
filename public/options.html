@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html class="dark" lang="zh-TW"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>neneneko - 伺服器選項</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#35355f",
+                        "primary-hover": "#4a4a7a",
+                        "background-light": "#f6f6f7",
+                        "background-dark": "#16161c",
+                        "sidebar-dark": "#1a1a24",
+                        "card-dark": "#1f1f29",
+                        "input-dark": "#2a2a35",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "mono": ["JetBrains Mono", "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "monospace"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }.toggle-checkbox:checked {
+            right: 0;
+            border-color: #68D391;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #68D391;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+            margin-top: -6px; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #4a4a7a;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex overflow-hidden">
+<aside class="w-64 bg-background-light dark:bg-sidebar-dark border-r border-primary/20 flex flex-col h-screen shrink-0">
+<div class="p-6 border-b border-primary/10">
+<div class="flex items-center gap-3 bg-primary/20 p-2 rounded-lg">
+<div class="w-8 h-8 bg-primary rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-xl">grid_view</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-sm font-bold dark:text-white leading-tight">Neneneko</h1>
+<p class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">伺服器管理平台</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 py-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-primary/10 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">dns</span>
+<span class="text-sm font-medium">伺服器</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary/30 text-white rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="text-sm font-medium">選項</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-primary/10 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">terminal</span>
+<span class="text-sm font-medium">控制台</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-primary/10 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">description</span>
+<span class="text-sm font-medium">紀錄</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-primary/10 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">group</span>
+<span class="text-sm font-medium">玩家</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-primary/10 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">extension</span>
+<span class="text-sm font-medium">軟體</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-primary/10 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">folder</span>
+<span class="text-sm font-medium">檔案</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-primary/10 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">public</span>
+<span class="text-sm font-medium">世界</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-primary/10 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">backup</span>
+<span class="text-sm font-medium">備份檔案</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-primary/10 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">lock_person</span>
+<span class="text-sm font-medium">存取權</span>
+</a>
+</nav>
+<div class="p-4 border-t border-primary/10 mt-auto">
+<div class="flex items-center justify-between bg-white/5 p-3 rounded-xl border border-white/5">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-[#fcd4b4] flex-shrink-0"></div>
+<span class="text-sm font-medium text-white">Admin User</span>
+</div>
+<span class="material-symbols-outlined text-slate-500 text-lg cursor-pointer hover:text-white transition-colors">logout</span>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-screen overflow-hidden bg-background-dark">
+<header class="h-20 px-8 flex items-center justify-between border-b border-primary/10 bg-background-dark/50 backdrop-blur-md z-10 shrink-0">
+<div>
+<h2 class="text-2xl font-bold dark:text-white tracking-tight">伺服器選項</h2>
+<p class="text-sm text-slate-500 mt-1">配置您的 Minecraft 伺服器核心設定</p>
+</div>
+</header>
+<div class="flex-1 p-8 overflow-y-auto">
+<div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="bg-card-dark rounded-xl border border-primary/10 shadow-lg p-6">
+<div class="flex items-center gap-3 mb-6 pb-4 border-b border-primary/10">
+<span class="p-2 rounded-lg bg-indigo-500/10 text-indigo-400 material-symbols-outlined">sports_esports</span>
+<h3 class="text-lg font-semibold text-white">遊戲設定</h3>
+</div>
+<div class="space-y-6">
+<div>
+<label class="block text-sm font-medium text-slate-400 mb-2">遊戲模式</label>
+<div class="relative">
+<select class="w-full bg-input-dark border border-primary/20 rounded-lg py-2.5 px-3 text-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none appearance-none">
+<option value="survival">生存模式 (Survival)</option>
+<option value="creative">創造模式 (Creative)</option>
+<option value="adventure">冒險模式 (Adventure)</option>
+<option value="spectator">旁觀模式 (Spectator)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-slate-500 pointer-events-none">expand_more</span>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-400 mb-2">難度</label>
+<div class="relative">
+<select class="w-full bg-input-dark border border-primary/20 rounded-lg py-2.5 px-3 text-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none appearance-none">
+<option value="peaceful">和平 (Peaceful)</option>
+<option value="easy">簡單 (Easy)</option>
+<option value="normal">普通 (Normal)</option>
+<option value="hard">困難 (Hard)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-slate-500 pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="flex items-center justify-between py-2">
+<div>
+<div class="text-sm font-medium text-slate-200">玩家對戰 (PvP)</div>
+<div class="text-xs text-slate-500">允許玩家互相攻擊</div>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer border-gray-600 left-0 checked:left-6 transition-all duration-300" id="pvp" name="pvp" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer" for="pvp"></label>
+</div>
+</div>
+<div class="flex items-center justify-between py-2">
+<div>
+<div class="text-sm font-medium text-slate-200">指令方塊</div>
+<div class="text-xs text-slate-500">啟用遊戲內的指令方塊功能</div>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer border-gray-600 left-0 checked:left-6 transition-all duration-300" id="cb" name="cb" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer" for="cb"></label>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-card-dark rounded-xl border border-primary/10 shadow-lg p-6">
+<div class="flex items-center gap-3 mb-6 pb-4 border-b border-primary/10">
+<span class="p-2 rounded-lg bg-emerald-500/10 text-emerald-400 material-symbols-outlined">security</span>
+<h3 class="text-lg font-semibold text-white">存取與安全</h3>
+</div>
+<div class="space-y-6">
+<div>
+<label class="block text-sm font-medium text-slate-400 mb-2">最大玩家數</label>
+<input class="w-full bg-input-dark border border-primary/20 rounded-lg py-2.5 px-3 text-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none placeholder-slate-600" type="number" value="20"/>
+</div>
+<div class="flex items-center justify-between py-2">
+<div>
+<div class="text-sm font-medium text-slate-200">白名單</div>
+<div class="text-xs text-slate-500">僅允許列表中的玩家加入</div>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer border-gray-600 left-0 checked:left-6 transition-all duration-300" id="whitelist" name="whitelist" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer" for="whitelist"></label>
+</div>
+</div>
+<div class="flex items-center justify-between py-2">
+<div>
+<div class="text-sm font-medium text-slate-200">正版驗證 (Online Mode)</div>
+<div class="text-xs text-slate-500">驗證玩家是否擁有正版 Minecraft</div>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer border-gray-600 left-0 checked:left-6 transition-all duration-300" id="onlinemode" name="onlinemode" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer" for="onlinemode"></label>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-card-dark rounded-xl border border-primary/10 shadow-lg p-6 lg:col-span-2">
+<div class="flex items-center gap-3 mb-6 pb-4 border-b border-primary/10">
+<span class="p-2 rounded-lg bg-amber-500/10 text-amber-400 material-symbols-outlined">public</span>
+<h3 class="text-lg font-semibold text-white">世界屬性</h3>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<div>
+<label class="block text-sm font-medium text-slate-400 mb-2">伺服器描述 (MOTD)</label>
+<div class="relative">
+<textarea class="w-full bg-input-dark border border-primary/20 rounded-lg py-3 px-3 text-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none resize-none font-mono text-sm placeholder-slate-600" rows="3">A Minecraft Server</textarea>
+<div class="absolute bottom-3 right-3 text-[10px] text-slate-500 bg-black/20 px-1 rounded">Color Codes Supported</div>
+</div>
+<p class="text-xs text-slate-500 mt-2">顯示在多人遊戲伺服器列表中的訊息。</p>
+</div>
+<div class="flex flex-col justify-center">
+<div class="flex justify-between items-center mb-4">
+<label class="block text-sm font-medium text-slate-400">視距 (View Distance)</label>
+<span class="text-sm font-bold text-primary-hover bg-primary/20 px-2 py-0.5 rounded">10 Chunks</span>
+</div>
+<div class="relative pt-1">
+<input class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer dark:bg-gray-700" max="32" min="3" type="range" value="10"/>
+<div class="flex justify-between text-xs text-slate-500 mt-2 px-1">
+<span>3 (低)</span>
+<span>10 (標準)</span>
+<span>32 (極高)</span>
+</div>
+</div>
+<p class="text-xs text-slate-500 mt-6">較高的數值會增加伺服器負載。建議設定在 6-10 之間。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<footer class="h-12 px-6 border-t border-primary/10 bg-sidebar-dark flex items-center justify-between shrink-0 z-20">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="text-[11px] font-medium text-slate-400 uppercase">狀態: 在線</span>
+</div>
+<div class="h-3 w-[1px] bg-white/10"></div>
+<div class="flex items-center gap-2">
+<span class="text-[11px] font-medium text-slate-500">版本: 1.20.1</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[11px] text-slate-500 uppercase">記憶體: <span class="text-slate-300 font-bold ml-1">2.4 / 24.0 GB</span></span>
+</div>
+</footer>
+</main>
+
+</body></html>

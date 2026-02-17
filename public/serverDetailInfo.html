@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html class="dark" lang="zh-TW"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>伺服器管理</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#35355f",
+                        "background-light": "#f6f6f7",
+                        "background-dark": "#16161c",
+                        "sidebar-dark": "#1a1a24",
+                        "terminal-dark": "#0c0c11",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "mono": ["JetBrains Mono", "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "monospace"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .log-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
+        .log-scroll::-webkit-scrollbar-track {
+            background: #16161c;
+        }
+        .log-scroll::-webkit-scrollbar-thumb {
+            background: #35355f;
+            border-radius: 4px;
+        }
+        .log-scroll::-webkit-scrollbar-thumb:hover {
+            background: #4a4a7a;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex overflow-hidden">
+<aside class="w-64 bg-background-light dark:bg-sidebar-dark border-r border-primary/20 flex flex-col h-screen shrink-0">
+<div class="p-6 border-b border-primary/10"><div class="flex items-center gap-3 bg-primary/20 p-2 rounded-lg">
+<div class="w-8 h-8 bg-primary rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-xl">grid_view</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-sm font-bold dark:text-white leading-tight">Neneneko</h1>
+<p class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">伺服器管理平台</p>
+</div>
+</div></div>
+<nav class="flex-1 px-4 py-4 space-y-2">
+<a class="flex items-center gap-3 px-3 py-2 bg-primary/30 text-white rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">dns</span>
+<span class="text-sm font-medium">伺服器</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-primary/10 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="text-sm font-medium">選項</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-primary/10 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">terminal</span>
+<span class="text-sm font-medium">控制台</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-primary/10 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">description</span>
+<span class="text-sm font-medium">紀錄</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-primary/10 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">group</span>
+<span class="text-sm font-medium">玩家</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-primary/10 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">category</span>
+<span class="text-sm font-medium">軟體</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-primary/10 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">folder</span>
+<span class="text-sm font-medium">檔案</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-primary/10 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">public</span>
+<span class="text-sm font-medium">世界</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-primary/10 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">history</span>
+<span class="text-sm font-medium">備份檔案</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-primary/10 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">lock_person</span>
+<span class="text-sm font-medium">存取權</span>
+</a>
+</nav>
+<div class="p-4 border-t border-primary/10 mt-auto"><div class="flex items-center justify-between bg-white/5 p-3 rounded-xl border border-white/5">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-[#fcd4b4] flex-shrink-0"></div>
+<span class="text-sm font-medium text-white">Admin User</span>
+</div>
+<span class="material-symbols-outlined text-slate-500 text-lg">logout</span>
+</div></div>
+</aside>
+<main class="flex-1 flex flex-col h-screen overflow-hidden relative">
+<header class="h-20 px-8 flex items-center justify-between border-b border-primary/10 bg-white dark:bg-background-dark/50 backdrop-blur-md z-10">
+<h2 class="text-2xl font-bold dark:text-white">伺服器</h2>
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-xs font-bold uppercase">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    Running
+                </div>
+</div>
+</header>
+<div class="flex-1 p-8 overflow-y-auto bg-background-light dark:bg-background-dark">
+<div class="max-w-5xl mx-auto space-y-6">
+<div class="bg-white dark:bg-sidebar-dark rounded-xl border border-primary/20 p-6 shadow-xl relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16 transition-all group-hover:bg-primary/10"></div>
+<div class="flex flex-col md:flex-row gap-8 items-start relative z-10">
+<div class="w-24 h-24 rounded-2xl bg-gradient-to-br from-primary to-slate-800 flex items-center justify-center shrink-0 shadow-lg">
+<span class="material-symbols-outlined text-white text-5xl">stadia_controller</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-start justify-between">
+<div>
+<h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-1">Survival Adventure #1</h3>
+<div class="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm font-mono mb-4">
+<span class="material-symbols-outlined text-[16px]">link</span>
+                                survival.neneneko.tw:25565
+                                <button class="hover:text-primary transition-colors" title="Copy IP">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-2">
+<div class="bg-background-light dark:bg-background-dark/50 rounded-lg p-3 border border-primary/10">
+<span class="text-xs text-slate-500 uppercase font-semibold block mb-1">Software</span>
+<span class="text-sm font-medium dark:text-slate-200">Paper</span>
+</div>
+<div class="bg-background-light dark:bg-background-dark/50 rounded-lg p-3 border border-primary/10">
+<span class="text-xs text-slate-500 uppercase font-semibold block mb-1">Version</span>
+<span class="text-sm font-medium dark:text-slate-200">1.20.1</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-3 w-full md:w-auto mt-4 md:mt-0">
+<button class="flex items-center justify-center gap-2 px-6 py-2.5 bg-red-500 hover:bg-red-600 text-white text-sm font-bold rounded-lg transition-all shadow-lg hover:shadow-red-500/20 active:scale-95">
+<span class="material-symbols-outlined text-[20px]">stop_circle</span>
+                            Stop
+                        </button>
+<button class="flex items-center justify-center gap-2 px-6 py-2.5 bg-slate-700 hover:bg-slate-600 text-white text-sm font-bold rounded-lg transition-all shadow-lg active:scale-95">
+<span class="material-symbols-outlined text-[20px]">terminal</span>
+                            Start Console
+                        </button>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-white dark:bg-sidebar-dark rounded-xl border border-primary/20 p-6 shadow-lg">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary dark:text-slate-400">memory</span>
+<h4 class="text-lg font-bold dark:text-white">CPU Usage</h4>
+</div>
+<span class="text-2xl font-mono font-bold text-primary dark:text-white">12%</span>
+</div>
+<div class="h-32 w-full bg-background-light dark:bg-background-dark/50 rounded-lg relative overflow-hidden flex items-end justify-between px-1 gap-1">
+<div class="w-full bg-primary/20 h-[20%] rounded-sm"></div>
+<div class="w-full bg-primary/20 h-[35%] rounded-sm"></div>
+<div class="w-full bg-primary/20 h-[45%] rounded-sm"></div>
+<div class="w-full bg-primary/20 h-[30%] rounded-sm"></div>
+<div class="w-full bg-primary/20 h-[25%] rounded-sm"></div>
+<div class="w-full bg-primary/20 h-[40%] rounded-sm"></div>
+<div class="w-full bg-primary/20 h-[55%] rounded-sm"></div>
+<div class="w-full bg-primary/20 h-[45%] rounded-sm"></div>
+<div class="w-full bg-primary/20 h-[35%] rounded-sm"></div>
+<div class="w-full bg-primary/20 h-[25%] rounded-sm"></div>
+<div class="w-full bg-primary/20 h-[15%] rounded-sm"></div>
+<div class="w-full bg-primary/30 h-[12%] rounded-sm"></div>
+</div>
+</div>
+<div class="bg-white dark:bg-sidebar-dark rounded-xl border border-primary/20 p-6 shadow-lg">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-emerald-500">memory_alt</span>
+<h4 class="text-lg font-bold dark:text-white">RAM Usage</h4>
+</div>
+<div class="text-right">
+<span class="text-2xl font-mono font-bold text-emerald-500">2.4 GB</span>
+<span class="text-xs text-slate-500 block">of 8.0 GB</span>
+</div>
+</div>
+<div class="h-32 w-full bg-background-light dark:bg-background-dark/50 rounded-lg relative overflow-hidden flex items-end justify-between px-1 gap-1">
+<div class="w-full bg-emerald-500/20 h-[28%] rounded-sm"></div>
+<div class="w-full bg-emerald-500/20 h-[29%] rounded-sm"></div>
+<div class="w-full bg-emerald-500/20 h-[30%] rounded-sm"></div>
+<div class="w-full bg-emerald-500/20 h-[30%] rounded-sm"></div>
+<div class="w-full bg-emerald-500/20 h-[31%] rounded-sm"></div>
+<div class="w-full bg-emerald-500/20 h-[30%] rounded-sm"></div>
+<div class="w-full bg-emerald-500/20 h-[32%] rounded-sm"></div>
+<div class="w-full bg-emerald-500/20 h-[31%] rounded-sm"></div>
+<div class="w-full bg-emerald-500/20 h-[30%] rounded-sm"></div>
+<div class="w-full bg-emerald-500/20 h-[30%] rounded-sm"></div>
+<div class="w-full bg-emerald-500/20 h-[29%] rounded-sm"></div>
+<div class="w-full bg-emerald-500/30 h-[30%] rounded-sm"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+</body></html>

@@ -1,10 +1,9 @@
 import axios from 'axios';
-import config from '../config';
 
 const request = axios.create({
-  baseURL: config.apiBaseURL,
-  timeout: config.timeout,
-  withCredentials: config.withCredentials,
+  baseURL: process.env.REACT_APP_API_BASE || 'http://localhost:8080',
+  timeout: 10000,
+  withCredentials: true,
 });
 
 export default request;

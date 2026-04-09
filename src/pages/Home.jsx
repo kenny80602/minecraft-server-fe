@@ -1,8 +1,6 @@
-import config from '../config';
-
 export default function Home() {
   const handleLineLogin = () => {
-    window.location.href = `${config.apiBaseURL}/oauth2/authorization/line`;
+    window.location.href = `${process.env.REACT_APP_API_BASE}/oauth2/authorization/line`;
   };
 
   return (

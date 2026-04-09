@@ -1,71 +1,80 @@
-# Getting Started with Create React App
+# Neneneko - Minecraft 伺服器管理平台
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Neneneko 是一個基於 React 的 Minecraft 伺服器管理前端介面，提供直覺的深色主題 UI，讓管理員可以輕鬆管理伺服器的各項功能。
 
-## Available Scripts
+## 功能頁面
 
-In the project directory, you can run:
+| 頁面 | 路由 | 說明 |
+|------|------|------|
+| 登入 | `/` | 使用者登入 / 註冊頁面 |
+| 伺服器 | `/dashboard` | 伺服器總覽、狀態監控、CPU / RAM 使用率圖表 |
+| 選項 | `/options` | 伺服器設定（遊戲模式、難度、安全性、網路等） |
+| 控制台 | `/console` | 即時終端機，查看伺服器輸出並執行指令 |
+| 紀錄 | `/logs` | 伺服器日誌瀏覽，支援即時更新 |
+| 玩家 | `/players` | 玩家管理（在線狀態、白名單、封禁） |
+| 軟體 | `/software` | 伺服器核心安裝（Paper、Spigot、Forge 等）與版本管理 |
+| 檔案 | `/files` | 檔案管理器（瀏覽、上傳、刪除、多選操作） |
+| 世界 | `/worlds` | 世界地圖管理與備份還原 |
+| 備份檔案 | `/backups` | 備份管理、自動排程、儲存空間監控 |
+| 存取權 | `/access` | 使用者權限控制（細粒度的 toggle 開關） |
 
-### `npm start`
+## 技術棧
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **React** 19 + React Router 7
+- **Tailwind CSS** 3（含 `@tailwindcss/forms` 插件）
+- **Material Symbols Outlined**（Google 圖示字型）
+- **Axios**（HTTP 請求）
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 專案結構
 
-### `npm test`
+```
+src/
+├── components/
+│   ├── DashboardLayout.jsx   # 共用版面（Sidebar + 內容區）
+│   └── Sidebar.jsx           # 側邊欄導覽
+├── pages/
+│   ├── Home.jsx              # 登入頁
+│   ├── Dashboard.jsx         # 伺服器總覽
+│   ├── Options.jsx           # 伺服器選項
+│   ├── Console.jsx           # 即時控制台
+│   ├── Logs.jsx              # 伺服器紀錄
+│   ├── Players.jsx           # 玩家管理
+│   ├── Software.jsx          # 軟體安裝
+│   ├── Files.jsx             # 檔案管理
+│   ├── Worlds.jsx            # 世界管理
+│   ├── Backups.jsx           # 備份管理
+│   └── Access.jsx            # 存取權限
+└── App.js                    # 路由設定
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 快速開始
 
-### `npm run build`
+### 安裝依賴
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 啟動開發伺服器
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm start
+```
 
-### `npm run eject`
+開啟 [http://localhost:3000](http://localhost:3000) 即可瀏覽。
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 建置生產版本
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm run build
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+輸出至 `build/` 資料夾。
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 設計風格
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# minecraft-server-fe
+- 深色主題（Dark Mode）
+- 主色調：`#35355f`
+- 背景色：`#16161c`（主區域）/ `#1a1a24`（側邊欄）
+- 字型：Inter + Noto Sans TC
+- 圖示：[Material Symbols Outlined](https://fonts.google.com/icons)

@@ -10,6 +10,7 @@ import Files from './pages/Files';
 import Worlds from './pages/Worlds';
 import Backups from './pages/Backups';
 import Access from './pages/Access';
+import OAuthCallback from './pages/OAuthCallback';
 import DashboardLayout from './components/DashboardLayout';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/oauth/callback" element={<OAuthCallback />} />
         <Route element={<DashboardLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/options" element={<Options />} />

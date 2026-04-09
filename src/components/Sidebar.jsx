@@ -3,14 +3,14 @@ import { Link, useLocation } from 'react-router-dom';
 const navItems = [
   { icon: 'dns', label: '伺服器', path: '/dashboard' },
   { icon: 'settings', label: '選項', path: '/options' },
-  { icon: 'terminal', label: '控制台', path: '#' },
-  { icon: 'description', label: '紀錄', path: '#' },
-  { icon: 'group', label: '玩家', path: '#' },
-  { icon: 'category', label: '軟體', path: '#' },
-  { icon: 'folder', label: '檔案', path: '#' },
-  { icon: 'public', label: '世界', path: '#' },
-  { icon: 'history', label: '備份檔案', path: '#' },
-  { icon: 'lock_person', label: '存取權', path: '#' },
+  { icon: 'terminal', label: '控制台', path: '/console' },
+  { icon: 'receipt_long', label: '紀錄', path: '/logs' },
+  { icon: 'group', label: '玩家', path: '/players' },
+  { icon: 'category', label: '軟體', path: '/software' },
+  { icon: 'folder', label: '檔案', path: '/files' },
+  { icon: 'public', label: '世界', path: '/worlds' },
+  { icon: 'history', label: '備份檔案', path: '/backups' },
+  { icon: 'lock_person', label: '存取權', path: '/access' },
 ];
 
 export default function Sidebar() {

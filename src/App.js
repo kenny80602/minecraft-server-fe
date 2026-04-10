@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
+import Servers from './pages/Servers';
 import Dashboard from './pages/Dashboard';
 import Options from './pages/Options';
 import Console from './pages/Console';
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/oauth/callback" element={<OAuthCallback />} />
+        <Route path="/servers" element={<Servers />} />
         <Route element={<DashboardLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/options" element={<Options />} />

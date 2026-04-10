@@ -1,12 +1,45 @@
+import { useState, useEffect } from 'react';
+import { getServerStatus, startServer, stopServer } from '../api/serve';
+
 export default function Dashboard() {
+  const [serverRunning, setServerRunning] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    getServerStatus()
+      .then((res) => setServerRunning(res.data?.running ?? false))
+      .catch(() => setServerRunning(false));
+  }, []);
+
+  const handleToggleServer = async () => {
+    setLoading(true);
+    try {
+      if (serverRunning) {
+        await stopServer();
+        setServerRunning(false);
+      } else {
+        await startServer({ versionId: '1.20.1' });
+        setServerRunning(true);
+      }
+    } catch (err) {
+      console.error('Failed to toggle server:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       <header className="h-20 px-8 flex items-center justify-between border-b border-primary/10 bg-background-dark/50 backdrop-blur-md z-10 shrink-0">
         <h2 className="text-2xl font-bold text-white">伺服器</h2>
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-xs font-bold uppercase">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            Running
+          <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold uppercase ${
+            serverRunning
+              ? 'bg-emerald-500/10 border border-emerald-500/20 text-emerald-500'
+              : 'bg-slate-500/10 border border-slate-500/20 text-slate-400'
+          }`}>
+            <span className={`w-2 h-2 rounded-full ${serverRunning ? 'bg-emerald-500 animate-pulse' : 'bg-slate-500'}`} />
+            {serverRunning ? 'Running' : 'Stopped'}
           </div>
         </div>
       </header>
@@ -45,9 +78,19 @@ export default function Dashboard() {
                 </div>
               </div>
               <div className="flex flex-col gap-3 w-full md:w-auto mt-4 md:mt-0">
-                <button className="flex items-center justify-center gap-2 px-6 py-2.5 bg-red-500 hover:bg-red-600 text-white text-sm font-bold rounded-lg transition-all shadow-lg hover:shadow-red-500/20 active:scale-95">
-                  <span className="material-symbols-outlined text-[20px]">stop_circle</span>
-                  Stop
+                <button
+                  onClick={handleToggleServer}
+                  disabled={loading}
+                  className={`flex items-center justify-center gap-2 px-6 py-2.5 text-white text-sm font-bold rounded-lg transition-all shadow-lg active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed ${
+                    serverRunning
+                      ? 'bg-red-500 hover:bg-red-600 hover:shadow-red-500/20'
+                      : 'bg-emerald-500 hover:bg-emerald-600 hover:shadow-emerald-500/20'
+                  }`}
+                >
+                  <span className="material-symbols-outlined text-[20px]">
+                    {serverRunning ? 'stop_circle' : 'play_circle'}
+                  </span>
+                  {loading ? (serverRunning ? 'Stopping...' : 'Starting...') : (serverRunning ? 'Stop' : 'Start')}
                 </button>
                 <button className="flex items-center justify-center gap-2 px-6 py-2.5 bg-slate-700 hover:bg-slate-600 text-white text-sm font-bold rounded-lg transition-all shadow-lg active:scale-95">
                   <span className="material-symbols-outlined text-[20px]">terminal</span>

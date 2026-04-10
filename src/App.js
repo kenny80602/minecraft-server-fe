@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import Servers from './pages/Servers';
+import CreateServer from './pages/CreateServer';
+import Account from './pages/Account';
 import Dashboard from './pages/Dashboard';
 import Options from './pages/Options';
 import Console from './pages/Console';
@@ -21,6 +23,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/oauth/callback" element={<OAuthCallback />} />
         <Route path="/servers" element={<Servers />} />
+        <Route path="/servers/create" element={<CreateServer />} />
+        <Route path="/account" element={<Account />} />
         <Route element={<DashboardLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/options" element={<Options />} />
